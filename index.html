@@ -275,6 +275,11 @@ dialog button.primary { background:var(--ui-accent); }
 #reportScore { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0; margin-bottom:8px; background:#213f41; color:#fff4d4; border:2px solid #a08a54; border-radius:12px; overflow:hidden; }
 #reportScore:has(#personalBest) { grid-template-columns:repeat(3,minmax(0,1fr)); }
 #reportScore div { display:grid; padding:6px 12px; }
+#retryDates:not([hidden]) { display:flex; align-items:center; flex-wrap:wrap; gap:5px; padding:4px 0; }
+#retryDates b { margin-right:4px; }
+#reportDialog #retryDates button { min-width:48px; min-height:44px; margin:0; }
+#dayDialog #evening:not([hidden]) { display:flex; flex-wrap:wrap; gap:6px; }
+#dayPracticeCompare { padding:6px 10px; margin:5px 0; background:#24514f; color:#fff3ca; border-radius:6px; font-weight:bold; }
 #dayRace { margin:5px 0; padding:5px 10px; border-radius:6px; font-weight:700; background:#ffdfa1; color:#392d1d; }
 @media(prefers-reduced-motion:no-preference){
  #reportScore.record-pop .score-coin { animation:best-coin .48s ease-out; }
@@ -1298,7 +1303,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 <div class="world-tools"><button id="clearMapOrders" class="world-piece" type="button" hidden disabled>선택 모두 취소</button><button id="bookButton" class="world-piece" type="button" aria-haspopup="dialog" aria-controls="orderBook" aria-expanded="false"><span id="ticketArt" aria-hidden="true"></span>주문 수첩</button><button class="primary" id="startButton">배송 출발</button></div>
 </main>
 <dialog id="gameMenu" class="world-dialog" aria-labelledby="gameMenuTitle"><div class="terminal-top"><span class="terminal-lamp" aria-hidden="true"></span>배차 단말기<span class="terminal-speaker" aria-hidden="true"></span></div>
-<div class="terminal-display"><div><p id="terminalMission"></p><h2 id="gameMenuTitle">게임 메뉴</h2></div><span class="terminal-parcel" aria-hidden="true"></span></div><nav id="stages" aria-label="판 고르기"></nav><p id="testNotice" hidden>테스트 모드 · 진행 기록은 따로 저장돼요.</p><div class="menu-actions"><button id="helpButton" type="button">규칙 보기</button><button id="reviewBriefing" type="button" aria-haspopup="dialog" aria-controls="opsIntro" hidden>오늘 업무 설명</button><button id="mapModeButton" type="button" hidden>2D 지도로 보기</button></div><div class="speed" role="group" aria-label="재생 속도"><span>재생 속도</span><button type="button" data-speed="1" aria-pressed="true">1×</button><button type="button" data-speed="2" aria-pressed="false">2×</button><button type="button" data-speed="4" aria-pressed="false">4×</button><button id="muteButton" data-sound-toggle type="button" aria-pressed="false" hidden>음소거</button></div><p id="stageInstruction"></p><div class="controls"><button id="undoButton">되돌리기</button><button id="clearButton">길 지우기</button></div><details class="route"><summary><span id="routeLabel">내가 이은 길</span> <span id="routeHint"></span></summary><p class="map-note" id="roadLegend"></p><div id="routeSteps"></div><p id="routeNote">경로의 가게 이름을 누르면 그곳까지 남기고 다시 이을 수 있어요.</p></details>
+<div class="terminal-display"><div><p id="terminalMission"></p><h2 id="gameMenuTitle">게임 메뉴</h2></div><span class="terminal-parcel" aria-hidden="true"></span></div><nav id="stages" aria-label="판 고르기"></nav><p id="testNotice" hidden>테스트 모드 · 진행 기록은 따로 저장돼요.</p><div class="menu-actions"><button id="helpButton" type="button">규칙 보기</button><button id="reviewBriefing" type="button" aria-haspopup="dialog" aria-controls="opsIntro" hidden>오늘 업무 설명</button><button id="exitDayPractice" hidden>연습 끝내고 원래 결산 보기</button><button id="mapModeButton" type="button" hidden>2D 지도로 보기</button></div><div class="speed" role="group" aria-label="재생 속도"><span>재생 속도</span><button type="button" data-speed="1" aria-pressed="true">1×</button><button type="button" data-speed="2" aria-pressed="false">2×</button><button type="button" data-speed="4" aria-pressed="false">4×</button><button id="muteButton" data-sound-toggle type="button" aria-pressed="false" hidden>음소거</button></div><p id="stageInstruction"></p><div class="controls"><button id="undoButton">되돌리기</button><button id="clearButton">길 지우기</button></div><details class="route"><summary><span id="routeLabel">내가 이은 길</span> <span id="routeHint"></span></summary><p class="map-note" id="roadLegend"></p><div id="routeSteps"></div><p id="routeNote">경로의 가게 이름을 누르면 그곳까지 남기고 다시 이을 수 있어요.</p></details>
 <button type="button" id="closeGameMenu" autofocus><span aria-hidden="true">▶</span> 게임으로 돌아가기</button>
 </dialog>
 <dialog id="orderBook" class="world-dialog ticket" aria-labelledby="ticketTitle"><div class="world-dialog-heading ticket-heading"><h2 id="ticketTitle">주문 수첩</h2><div class="ticket-count"><b id="orderCount"></b><span id="selectedTotal"></span></div><button id="clearBookOrders" type="button" hidden disabled>선택 모두 취소</button><button type="button" id="closeBook" autofocus>닫기</button></div><p id="orderIntro"></p><button type="button" id="bookCoachExit" hidden></button><p id="orderNews" hidden></p><div class="ticket-orders" role="region" aria-labelledby="ticketTitle" tabindex="0"><div id="bookEstimate" aria-live="polite" hidden></div><div class="trip-compare" id="bookTripCompare" aria-live="polite" hidden></div><p id="eventForecast" class="forecast" hidden></p><label id="scenarioControl" hidden>테스트 정체 사례 <select id="trafficScenario"><option value="2">추가 2분</option><option value="4">추가 4분</option><option value="6">추가 6분</option></select></label><div id="orders"></div><fieldset id="opsChoice" class="ops-choice" hidden></fieldset><div id="cargoTrips" hidden></div><ol id="routeStrip" class="route-strip" aria-label="배송 순서" hidden></ol></div></dialog>
@@ -1334,8 +1339,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 <h3 class="truck-example">상자 3개를 실으면</h3>
 <div class="truck-keys"><button id="keepTruck" type="button"></button><button id="buyTruck" type="button"></button></div>
 </dialog>
-<dialog id="dayDialog" aria-labelledby="dayTitle"><h2 id="dayTitle" tabindex="-1" autofocus></h2><p id="dayDeliveryStamp" class="delivery-stamp" hidden></p><div class="ledger-body" tabindex="0" role="region" aria-label="장부 상세"><div id="daySummary" class="compare"></div><p id="dayRace" hidden></p><details class="ledger-orders"><summary>오늘 주문과 주차 내역</summary><div id="dayCompare" class="compare"></div></details></div><div id="evening" class="ledger-actions" hidden><button class="primary" id="nextDayButton">다음 날 시작</button></div><button class="primary ledger-actions" id="reportButton" hidden>결과 카드 보기</button></dialog>
-<dialog id="reportDialog" class="report" aria-labelledby="reportTitle"><small id="reportKicker"></small><h2 id="reportTitle" tabindex="-1" autofocus><span id="reportDuration" class="report-duration"></span> 동안 택배 회사에 남은 돈 <span id="reportMoney"></span></h2><p id="reportOutcome"></p><div class="report-body" tabindex="0" role="region" aria-label="결과 상세"><section id="reportScore" aria-label="5일 순이익 비교"></section><div id="reportFlow"></div><table id="reportDays"></table><div id="reportInvest" class="compare"></div><ul class="report-questions"><li>배송료는 누가 내고, 임금은 누가 받았나요?</li><li>기사에게 수당 없이 더 일해 달라고 할 수 있나요?</li><li>통행로를 막으면 다음 날 주문은 어떻게 달라지나요?</li></ul></div><div class="report-actions"><button class="primary" id="restartOps">같은 주문으로 다시 도전</button><button id="closeReport">닫기</button></div></dialog>
+<dialog id="dayDialog" aria-labelledby="dayTitle"><h2 id="dayTitle" tabindex="-1" autofocus></h2><p id="dayDeliveryStamp" class="delivery-stamp" hidden></p><div class="ledger-body" tabindex="0" role="region" aria-label="장부 상세"><div id="daySummary" class="compare"></div><p id="dayPracticeCompare" hidden></p><p id="dayRace" hidden></p><details class="ledger-orders"><summary>오늘 주문과 주차 내역</summary><div id="dayCompare" class="compare"></div></details></div><div id="evening" class="ledger-actions" hidden><button id="returnToReport" hidden>원래 결산으로</button><button class="primary" id="nextDayButton">다음 날 시작</button></div><button class="primary ledger-actions" id="reportButton" hidden>결과 카드 보기</button></dialog>
+<dialog id="reportDialog" class="report" aria-labelledby="reportTitle"><small id="reportKicker"></small><h2 id="reportTitle" tabindex="-1" autofocus><span id="reportDuration" class="report-duration"></span> 동안 택배 회사에 남은 돈 <span id="reportMoney"></span></h2><p id="reportOutcome"></p><div class="report-body" tabindex="0" role="region" aria-label="결과 상세"><section id="reportScore" aria-label="5일 순이익 비교"></section><div id="reportFlow"></div><table id="reportDays"></table><div id="reportInvest" class="compare"></div><ul class="report-questions"><li>배송료는 누가 내고, 임금은 누가 받았나요?</li><li>기사에게 수당 없이 더 일해 달라고 할 수 있나요?</li><li>통행로를 막으면 다음 날 주문은 어떻게 달라지나요?</li></ul></div><div id="retryDates" role="group" aria-label="날짜를 골라 다시 배차"><b>다시 배차할 날</b><button type="button" data-retry-day="1">1일차</button><button type="button" data-retry-day="2">2일차</button><button type="button" data-retry-day="3">3일차</button><button type="button" data-retry-day="4">4일차</button><button type="button" data-retry-day="5">5일차</button></div><div class="report-actions"><button class="primary" id="restartOps">같은 주문으로 다시 도전</button><button id="closeReport">닫기</button></div></dialog>
 <script>const ATLAS={"cell":160,"sprites":{"bakery":{"x":0,"y":0,"w":120,"h":127,"cw":160,"ch":160,"ox":20,"oy":20},"flower":{"x":123,"y":0,"w":110,"h":127,"cw":160,"ch":160,"ox":25,"oy":20},"cafe":{"x":236,"y":0,"w":114,"h":127,"cw":160,"ch":160,"ox":23,"oy":20},"depot":{"x":353,"y":0,"w":117,"h":127,"cw":160,"ch":160,"ox":22,"oy":20},"fruit":{"x":473,"y":0,"w":125,"h":127,"cw":160,"ch":160,"ox":18,"oy":20},"stationery":{"x":601,"y":0,"w":125,"h":127,"cw":160,"ch":160,"ox":18,"oy":20},"shop-gift":{"x":729,"y":0,"w":129,"h":127,"cw":160,"ch":160,"ox":16,"oy":20},"house":{"x":861,"y":0,"w":134,"h":127,"cw":160,"ch":160,"ox":13,"oy":20},"villa":{"x":0,"y":130,"w":116,"h":127,"cw":160,"ch":160,"ox":22,"oy":20},"apartment":{"x":119,"y":130,"w":116,"h":127,"cw":160,"ch":160,"ox":22,"oy":20},"office":{"x":238,"y":130,"w":128,"h":127,"cw":160,"ch":160,"ox":16,"oy":20},"market":{"x":369,"y":130,"w":139,"h":126,"cw":160,"ch":160,"ox":11,"oy":21},"pedestrian":{"x":511,"y":130,"w":116,"h":118,"cw":160,"ch":160,"ox":22,"oy":29},"tree-pine":{"x":630,"y":130,"w":77,"h":97,"cw":160,"ch":160,"ox":42,"oy":50},"tree-round":{"x":710,"y":130,"w":84,"h":96,"cw":160,"ch":160,"ox":38,"oy":51},"bridge":{"x":797,"y":130,"w":127,"h":88,"cw":320,"ch":160,"ox":97,"oy":59},"icon-coin":{"x":927,"y":130,"w":80,"h":81,"cw":96,"ch":96,"ox":8,"oy":7},"icon-clock":{"x":0,"y":260,"w":68,"h":81,"cw":96,"ch":96,"ox":14,"oy":7},"icon-megaphone":{"x":71,"y":260,"w":80,"h":81,"cw":96,"ch":96,"ox":8,"oy":7},"icon-truck":{"x":154,"y":260,"w":81,"h":81,"cw":96,"ch":96,"ox":8,"oy":7},"icon-star":{"x":238,"y":260,"w":81,"h":79,"cw":96,"ch":96,"ox":8,"oy":9},"flyer":{"x":322,"y":260,"w":74,"h":79,"cw":160,"ch":160,"ox":43,"oy":68},"truck-big":{"x":399,"y":260,"w":105,"h":78,"cw":160,"ch":160,"ox":28,"oy":69},"truck-big-left":{"x":507,"y":260,"w":105,"h":78,"cw":160,"ch":160,"ox":28,"oy":69},"parking":{"x":615,"y":260,"w":93,"h":78,"cw":160,"ch":160,"ox":34,"oy":69},"loading-dock":{"x":711,"y":260,"w":105,"h":76,"cw":160,"ch":160,"ox":28,"oy":71},"icon-check":{"x":819,"y":260,"w":81,"h":72,"cw":96,"ch":96,"ox":8,"oy":16},"icon-piggy":{"x":903,"y":260,"w":81,"h":72,"cw":96,"ch":96,"ox":8,"oy":16},"icon-box":{"x":0,"y":344,"w":81,"h":70,"cw":96,"ch":96,"ox":8,"oy":18},"van":{"x":84,"y":344,"w":95,"h":69,"cw":160,"ch":160,"ox":33,"oy":78},"van-left":{"x":182,"y":344,"w":95,"h":69,"cw":160,"ch":160,"ox":33,"oy":78},"barrier":{"x":280,"y":344,"w":90,"h":62,"cw":160,"ch":160,"ox":35,"oy":85},"traffic-jam":{"x":373,"y":344,"w":71,"h":55,"cw":160,"ch":160,"ox":45,"oy":92},"bench":{"x":447,"y":344,"w":67,"h":49,"cw":160,"ch":160,"ox":47,"oy":98},"flowerbed":{"x":517,"y":344,"w":70,"h":47,"cw":160,"ch":160,"ox":45,"oy":100},"bush":{"x":590,"y":344,"w":65,"h":45,"cw":160,"ch":160,"ox":48,"oy":102},"cones":{"x":658,"y":344,"w":50,"h":45,"cw":160,"ch":160,"ox":55,"oy":102}}},sheetMaxProfits={"base":95,"bundle":133};</script><script>(function(root){
  'use strict';
  const key=p=>p.join(','), edgeKey=(a,b)=>[key(a),key(b)].sort().join('|');
@@ -2522,6 +2527,7 @@ function openWorldDialog(id,origin=$(worldDialogs[id])){
  if(id==='gameMenu'){
   $('terminalMission').textContent=$('stageTitle').textContent;
   $('mapModeButton').hidden=!view3d;
+  $('exitDayPractice').hidden=!state.ops?.practiceSource||state.phase!=='planning';
   $('reviewBriefing').hidden=!state.ops||coaching();
   $('stages').inert=busy();
   for(const button of $('stages').querySelectorAll('button')){
@@ -2813,6 +2819,7 @@ function readOps(){
  return o;
 }
 function describeOps(o){
+ if(o.practiceSource)return `${o.day+1}일차 다시 배차 · ${o.step==='evening'?'장부':'연습 중'} · 회사에 ${o.money}코인`;
  const where=o.step==='done'&&o.reportSeen!==false?'운영 결과 카드':
   `${o.day+1}일차 ${o.step==='day'?(o.ruleSeen[o.day]?'배송 계획':'아침 규칙'):'장부'}`;
  if(o.day===0&&Number.isInteger(o.coach))return '기사와 배차 연습 · 이어서 하기';
@@ -2918,7 +2925,7 @@ function showRule(review=false){
  if(!o||intro.open)return;
  const day=OPS.days[o.day],lost=core.opsLost(OPS,o.day,opsSt());
  const regular=OPS.dayLimit,limit=limitOf(o.day),rate=OPS.overtime.rate;
- $('opsIntroStep').textContent=(o.day+1)+'일차 · 아침 업무 브리핑';
+ $('opsIntroStep').textContent=(o.day+1)+'일차 · '+(o.practiceSource?'다시 배차':'아침 업무 브리핑');
  $('opsIntroTitle').textContent=day.rule.head;
  $('opsIntroClose').textContent=review?'메뉴로 돌아가기':'알겠어요';
  renderRuleStory(o);
@@ -2968,7 +2975,7 @@ function openOps(o){
  }
  finishRecord(o);
  render();window.scrollTo(0,0);tell('');
- if(o.step==='evening'||(o.step==='done'&&o.reportSeen===false))showDay(o.log.at(-1));
+ if(o.step==='evening'||(o.step==='done'&&o.reportSeen===false&&!Number.isSafeInteger(o.finalPracticeNet)))showDay(o.log.at(-1));
  else if(o.step==='done')showReport();
  else{
   opsSave();
@@ -3109,7 +3116,15 @@ function renderOpsMetrics(){const s=stage(),p=preview(),a=active(),o=state.ops,l
 function altDay(change){const o=state.ops,st={...opsSt(),...change},ids=[...state.selected],r=opsRoute(core.opsStage(OPS,o.day,st),ids,st);if(!r)return null;return {...change,planned:r.time,time:r.time,net:core.opsSettle(OPS,{...r,time:OPS.days[o.day].overtime?r.time:Math.min(r.time,OPS.dayLimit)},truckCost()).net,ok:r.time<=limitOf(o.day)};}
 function finishDay(){const o=state.ops,s=stage(),r=state.sim,day=OPS.days[o.day],pick=x=>({id:x.id,name:x.name,reward:x.reward}),e={day:o.day,got:s.orders.filter(x=>state.selected.has(x.id)).map(pick),left:s.orders.filter(x=>!state.selected.has(x.id)).map(pick),lost:core.opsLost(OPS,o.day,opsSt()).map(pick),planned:state.baseline.plannedTime,time:r.time,...core.opsSettle(OPS,r,truckCost()),moneyBefore:o.money+truckCost(),deliveredCount:r.delivered.length};
  if(day.resident&&state.selected.has(day.resident)){e.resident=o.resident;e.alts=['walk','paid','block'].filter(x=>x!==o.resident).map(x=>altDay({resident:x}));}
- o.money=e.moneyBefore+e.net;o.log.push(e);o.step=o.day<OPS.days.length-1?'evening':'done';if(o.step==='done'){o.reportSeen=false;finishRecord(o);}opsSave();render();showDay(e,true);}
+ o.money=e.moneyBefore+e.net;o.log.push(e);o.step=o.day<OPS.days.length-1?'evening':'done';const practiceFinal=o.step==='done'&&!!o.practiceSource;
+ if(o.step==='done'){
+  if(practiceFinal){
+   o.finalPracticeNet=o.practiceSource.log[o.day].net;
+   delete o.practiceSource;
+  }
+  o.reportSeen=false;finishRecord(o);
+ }
+ opsSave();render();if(practiceFinal)showReport();else showDay(e,true);}
 const opsLine=(label,text)=>`<div><b>${label}</b><span>${text}</span></div>`,opsList=xs=>xs.map(x=>`${x.id} ${esc(x.name)} ${x.reward}코인`).join(' · ')||'없음',residentName=r=>({walk:'걸어가기',paid:'돈 내고 짐 내리기',block:'통행로에 세우기'})[r];
 function alternativeText(label,alt){if(!alt)return `${label} · 이 주문들로는 길을 짤 수 없어요`;if(!alt.ok)return `${label} · ${alt.planned}분이라 출발할 수 없었어요`;return `${label} · ${alt.time}분 · 오늘 남는 돈 ${alt.net}코인`;}
 function showDay(e,fresh=false){const o=state.ops;$('dayTitle').textContent=`${e.day+1}일차 마감 · 오늘의 장부`;
@@ -3125,6 +3140,11 @@ function showDay(e,fresh=false){const o=state.ops;$('dayTitle').textContent=`${e
  const line=$('dayRace');
  line.textContent=[verdict,Number.isFinite(pace)?`최고 기록의 ${e.day+1}일차 ${pace}코인 · 현재 ${signed(e.moneyBefore+e.net-pace)}코인 차이`:''].filter(Boolean).join(' · ');
  line.hidden=!line.textContent;
+ const source=o.practiceSource;
+ $('dayPracticeCompare').hidden=!source;
+ $('dayPracticeCompare').textContent=source?practiceComparison(e,source.log[e.day].net):'';
+ $('returnToReport').hidden=!source;
+ $('nextDayButton').textContent=source?'이 결과로 다음 날 계속':'다음 날 시작';
  let c=opsLine('받은 주문',opsList(e.got))+opsLine('포기한 주문',opsList(e.left));
  if(e.resident)c+=opsLine('보행자단지',residentName(e.resident)+(e.resident==='block'?' · 주민들이 통행로를 지나가지 못해 불편했어요':''))+(e.alts??[]).map(a=>opsLine('다른 방법이었다면',alternativeText(residentName(a?.resident),a))).join('');
  if(e.lost?.length)c+=opsLine('오지 않은 주문',opsList(e.lost)+' · 주민들이 다른 회사를 골랐어요');
@@ -3169,6 +3189,7 @@ function showReport(){
   $('reportOutcome').hidden=true;
  }
  details.open=false;
+ $('retryDates').hidden=!canRetryDate(o);
  const comparable=o.scoreRules===1,maximum=sheetMaxProfits[o.sheet],gap=maximum-o.money;
  const status=comparable?(gap===0?'최고 달성!':`최고까지 ${gap}코인`):'이전 저장 기록 · 현재 규칙으로 계산한 참고값';
  const verdict=recordVerdict(o),best=comparable?Math.max(o.money,o.bestBeforeFinish?.money??o.money):null;
@@ -3178,7 +3199,7 @@ function showReport(){
  $('reportScore').innerHTML=`<div><span>내 순이익</span><strong id="reportMoney">${o.money}<small>코인</small></strong></div>
  ${comparable?`<div><span>개인 최고</span><strong id="personalBest">${icon('icon-coin','score-coin')}${best}<small>코인</small></strong></div>`:''}
  <div><span>${comparable?'이 주문표':'현재 규칙'} 최대 순이익</span><strong>${maximum}<small>코인</small></strong></div>
- <p>${verdict?verdict+' · ':''}${status}${previous}</p>`;
+ <p>${verdict?verdict+' · ':''}${status}${previous}</p>${Number.isSafeInteger(o.finalPracticeNet)?`<p class="branch-result">${practiceComparison(log[4],o.finalPracticeNet)}</p>`:''}`;
  duration.textContent=`${log.length}일`;
  $('reportFlow').innerHTML=`<ul class="report-reflections">
   <li><small>(가계와 기업의 역할)</small> 너의 회사는 주민에게 배송료 ${sum('gross')}코인을 받고 배송했어요. ${o.truck?`탑차 ${o.truck}칸 · 투자비 ${sum('investment')}코인.`:''} <b>주민과 회사는 무엇을 주고받았나요?</b></li>
@@ -3194,6 +3215,41 @@ function showReport(){
  o.reportSeen=true;
  opsSave();
 }
+function practiceComparison(entry,originalNet){
+ return `${entry.day+1}일차 순이익 · 원래 ${originalNet} → 이번 ${entry.net}코인 (${signed(entry.net-originalNet)}코인)`;
+}
+function canRetryDate(o){
+ if(!comparableRun(o)||o.step!=='done'||o.log.length!==operatingDays)return false;
+ let balance=0;
+ return o.log.every((entry,day)=>{
+  if(entry.day!==day||entry.moneyBefore!==balance||!Number.isSafeInteger(entry.net))return false;
+  balance+=entry.net;return true;
+ })&&balance===o.money&&[2,3].includes(o.truck);
+}
+function retryDate(day){
+ const source=state.ops;
+ if(!$('reportDialog').open||!canRetryDate(source)||!Number.isInteger(day)||!source.log[day])return;
+ const attempt=opsNew(source.sheet);
+ attempt.day=day;
+ attempt.log=source.log.slice(0,day);
+ attempt.money=source.log[day].moneyBefore;
+ attempt.truck=day===4?source.truck:null;
+ attempt.previousProfit=source.money;
+ attempt.practiceSource=source;
+ $('reportDialog').close();openOps(attempt);
+}
+function returnToSource(){
+ const source=state.ops?.practiceSource;
+ if(!source)return;
+ if($('gameMenu').open)closeWorldDialog('gameMenu');
+ if($('dayDialog').open)$('dayDialog').close();
+ openOps(source);
+}
+$('retryDates').onclick=event=>{
+ const button=event.target.closest('[data-retry-day]');
+ if(button)retryDate(Number(button.dataset.retryDay)-1);
+};
+$('exitDayPractice').onclick=$('returnToReport').onclick=returnToSource;
 function opsRestart(){
  const finished=state.ops;
  if(finished?.step!=='done'||!$('reportDialog').open)return;
