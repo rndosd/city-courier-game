@@ -1243,7 +1243,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 </main>
 <main class="app" id="gameScreen" aria-label="도시 빠른 배송" hidden>
 <section class="world-stage map-wrap" aria-label="배송 지도"><div id="map3d" class="map3d" hidden></div><svg id="map" role="group" aria-label="배송 지도 · 가게나 교차로를 선택하세요"></svg></section>
-<section class="day-mission world-piece" aria-labelledby="stageTitle"><div class="mission-title"><span id="focus"></span><h2 id="stageTitle" tabindex="-1"></h2></div><strong id="nextAction" aria-live="polite"></strong><p id="orderTimeHint" hidden>표지의 시간은 센터에 돌아올 때까지예요.</p><ol id="goalSteps" class="goal-steps" aria-label="목표 순서"></ol><div id="mapActions" aria-label="지도에서 갈 곳"></div></section>
+<section class="day-mission world-piece" aria-labelledby="stageTitle"><div class="mission-title"><span id="focus"></span><h2 id="stageTitle" tabindex="-1"></h2></div><strong id="nextAction" aria-live="polite"></strong><p id="orderTimeHint" hidden>2칸이 차면 다음 짐은 센터에서 다시 실어요. 표지는 왕복 시간이에요.</p><button type="button" id="coachExit" hidden></button><ol id="goalSteps" class="goal-steps" aria-label="목표 순서"></ol><div id="mapActions" aria-label="지도에서 갈 곳"></div></section>
 <button id="gameMenuButton" class="world-piece menu-trigger" type="button" aria-haspopup="dialog" aria-controls="gameMenu" aria-expanded="false"><span aria-hidden="true">☰</span> 게임 메뉴</button>
 <div class="world-feedback"><div id="statusText" role="status" aria-live="polite"></div></div>
 <div class="world-resources world-piece"><div class="hud" aria-label="배송 자원"><div class="meter"><div class="top"><i class="ico" data-icon="icon-clock"></i><small id="timeLabel">예상 전체 시간</small></div><strong id="timeValue"></strong><span class="bar"><i id="timeBar"></i></span></div><div class="meter"><div class="top"><i class="ico" data-icon="icon-coin"></i><small id="rewardLabel">예상 배송료</small></div><strong id="rewardValue"></strong><span class="bar coin"><i id="rewardBar"></i></span></div><div class="meter"><div class="top"><i class="ico" data-icon="icon-box"></i><small id="loadLabel">한 번에 싣는 짐</small></div><strong id="loadValue"></strong><span class="bar box"><i id="loadBar"></i></span></div></div><div class="trip-compare" id="hudTripCompare" hidden></div>
@@ -1254,7 +1254,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 <div class="terminal-display"><div><p id="terminalMission"></p><h2 id="gameMenuTitle">게임 메뉴</h2></div><span class="terminal-parcel" aria-hidden="true"></span></div><nav id="stages" aria-label="판 고르기"></nav><p id="testNotice" hidden>테스트 모드 · 진행 기록은 따로 저장돼요.</p><div class="menu-actions"><button id="helpButton" type="button">규칙 보기</button><button id="reviewBriefing" type="button" aria-haspopup="dialog" aria-controls="opsIntro" hidden>오늘 업무 설명</button><button id="mapModeButton" type="button" hidden>2D 지도로 보기</button></div><div class="speed" role="group" aria-label="재생 속도"><span>재생 속도</span><button type="button" data-speed="1" aria-pressed="true">1×</button><button type="button" data-speed="2" aria-pressed="false">2×</button><button type="button" data-speed="4" aria-pressed="false">4×</button><button id="muteButton" data-sound-toggle type="button" aria-pressed="false" hidden>음소거</button></div><p id="stageInstruction"></p><div class="controls"><button id="undoButton">되돌리기</button><button id="clearButton">길 지우기</button></div><details class="route"><summary><span id="routeLabel">내가 이은 길</span> <span id="routeHint"></span></summary><p class="map-note" id="roadLegend"></p><div id="routeSteps"></div><p id="routeNote">경로의 가게 이름을 누르면 그곳까지 남기고 다시 이을 수 있어요.</p></details>
 <button type="button" id="closeGameMenu" autofocus><span aria-hidden="true">▶</span> 게임으로 돌아가기</button>
 </dialog>
-<dialog id="orderBook" class="world-dialog ticket" aria-labelledby="ticketTitle"><div class="world-dialog-heading ticket-heading"><h2 id="ticketTitle">주문 수첩</h2><div class="ticket-count"><b id="orderCount"></b><span id="selectedTotal"></span></div><button id="clearBookOrders" type="button" hidden disabled>선택 모두 취소</button><button type="button" id="closeBook" autofocus>닫기</button></div><p id="orderIntro"></p><p id="orderNews" hidden></p><div class="ticket-orders" role="region" aria-labelledby="ticketTitle" tabindex="0"><div id="bookEstimate" aria-live="polite" hidden></div><div class="trip-compare" id="bookTripCompare" aria-live="polite" hidden></div><p id="eventForecast" class="forecast" hidden></p><label id="scenarioControl" hidden>테스트 정체 사례 <select id="trafficScenario"><option value="2">추가 2분</option><option value="4">추가 4분</option><option value="6">추가 6분</option></select></label><div id="orders"></div><fieldset id="opsChoice" class="ops-choice" hidden></fieldset><div id="cargoTrips" hidden></div><ol id="routeStrip" class="route-strip" aria-label="배송 순서" hidden></ol></div></dialog>
+<dialog id="orderBook" class="world-dialog ticket" aria-labelledby="ticketTitle"><div class="world-dialog-heading ticket-heading"><h2 id="ticketTitle">주문 수첩</h2><div class="ticket-count"><b id="orderCount"></b><span id="selectedTotal"></span></div><button id="clearBookOrders" type="button" hidden disabled>선택 모두 취소</button><button type="button" id="closeBook" autofocus>닫기</button></div><p id="orderIntro"></p><button type="button" id="bookCoachExit" hidden></button><p id="orderNews" hidden></p><div class="ticket-orders" role="region" aria-labelledby="ticketTitle" tabindex="0"><div id="bookEstimate" aria-live="polite" hidden></div><div class="trip-compare" id="bookTripCompare" aria-live="polite" hidden></div><p id="eventForecast" class="forecast" hidden></p><label id="scenarioControl" hidden>테스트 정체 사례 <select id="trafficScenario"><option value="2">추가 2분</option><option value="4">추가 4분</option><option value="6">추가 6분</option></select></label><div id="orders"></div><fieldset id="opsChoice" class="ops-choice" hidden></fieldset><div id="cargoTrips" hidden></div><ol id="routeStrip" class="route-strip" aria-label="배송 순서" hidden></ol></div></dialog>
 <dialog id="bakeryDialogue" aria-labelledby="bakerySpeaker" aria-describedby="bakeryLine">
 <img id="bakeryPortrait" class="bakery-portrait" src="data:image/webp;base64,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" alt="" width="296" height="296">
 <div class="bakery-copy">
@@ -1468,8 +1468,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
    {title:'1일차 · 첫 배송',rule:{head:'택배 기사는 하루 20분만 일해요',body:'예상 시간이 20분을 넘으면 출발할 수 없어요. 오늘 배송할 주문을 골라 보세요.'},orders:[order('A','한빛빌라',2,1,18,'villa'),order('B','서쪽상가',1,3,14,'bakery'),order('C','서쪽주택',1,5,18,'house'),order('D','동쪽오피스',8,5,16,'office'),order('E','새봄아파트',6,5,16,'apartment'),order('F','남쪽상가',3,5,12,'fruit')]},
    {title:'2일차 · 주민 통행로',rule:{head:'보행자단지 앞은 주민이 다니는 길이에요',body:'보행자단지 주문을 받으면 탑차를 어디에 세울지 골라요.'},resident:'A',orders:[order('A','보행자단지',8,3,28,'pedestrian'),order('G','동쪽시장',6,3,16,'market'),order('F','남쪽상가',3,5,12,'fruit'),order('C','한빛빌라',2,1,18,'villa'),order('B','서쪽상가',1,3,14,'bakery'),order('D','서쪽주택',1,5,16,'house')]},
    {title:'3일차 · 주문이 몰린 날',rule:{head:'기사에게 더 일해 달라고 부탁할 수 있어요',body:'8분까지 더 일할 수 있어요. 더 일한 1분마다 3코인(평소의 1.5배)을 더 줘요.'},overtime:true,lostIfBlocked:['A','B','C','G','F'],orders:[order('A','동쪽오피스',8,5,16,'office'),order('B','보행자단지',8,3,18,'pedestrian'),order('C','새봄아파트',6,5,16,'apartment'),order('D','서쪽상가',1,3,14,'bakery'),order('E','한빛빌라',2,1,16,'villa'),order('F','남쪽상가',3,5,22,'fruit'),order('G','북쪽학원',5,1,14,'stationery'),order('H','서쪽주택',1,5,18,'house')]},
-   {title:'4일차 · 우리 회사 마음대로',rule:{head:'오늘은 우리 회사 마음대로',body:'어떤 주문을 받고, 어디에 탑차를 세울까요? 더 일한 시간에는 수당을 줘요.'},overtime:true,resident:'A',orders:[order('A','보행자단지',8,3,27,'pedestrian'),order('B','새봄아파트',6,5,17,'apartment'),order('C','동쪽오피스',8,5,16,'office'),order('D','서쪽상가',1,3,15,'bakery'),order('E','남쪽상가',3,5,15,'fruit'),order('F','북쪽학원',5,1,13,'stationery'),order('G','한빛빌라',2,1,15,'villa')]},
-   {title:'5일차 · 우리 회사 마음대로',rule:{head:'오늘은 우리 회사 마음대로',body:'남은 돈과 주민의 통행로를 생각하며 오늘의 배송을 정해요.'},overtime:true,resident:'A',lostIfBlocked:['B','D','E','F'],orders:[order('A','보행자단지',8,3,25,'pedestrian'),order('B','동쪽오피스',8,5,9,'office'),order('C','서쪽상가',1,3,6,'bakery'),order('D','남쪽상가',3,5,26,'fruit'),order('E','북쪽학원',5,1,20,'stationery'),order('F','서쪽주택',1,5,5,'house')]}
+   {title:'4일차 · 우리 회사 마음대로',rule:{head:'오늘은 우리 회사 마음대로',body:'어떤 주문을 받고, 어디에 탑차를 세울까요? 더 일한 시간에는 수당을 줘요.'},overtime:true,resident:'A',orders:[order('A','보행자단지',8,3,27,'pedestrian'),order('B','새봄아파트',6,5,17,'apartment'),order('C','동쪽오피스',8,5,16,'office'),order('D','서쪽상가',1,3,25,'bakery'),order('E','남쪽상가',3,5,15,'fruit'),order('F','북쪽학원',5,1,23,'stationery'),order('G','한빛빌라',2,1,23,'villa')]},
+   {title:'5일차 · 우리 회사 마음대로',rule:{head:'오늘은 우리 회사 마음대로',body:'남은 돈과 주민의 통행로를 생각하며 오늘의 배송을 정해요.'},overtime:true,resident:'A',lostIfBlocked:['B','D','E','F'],orders:[order('A','보행자단지',8,3,37,'pedestrian'),order('B','동쪽오피스',8,5,13,'office'),order('C','서쪽상가',1,3,6,'bakery'),order('D','남쪽상가',3,5,26,'fruit'),order('E','북쪽학원',5,1,28,'stationery'),order('F','서쪽주택',1,5,5,'house')]}
   ]};
  // 현장 사건 예시(이전 7·8단계, 바둑판 지도). 엔진 시험에만 쓴다.
  root.CITY_EVENT_SAMPLES=[
@@ -1677,7 +1677,7 @@ const state={stageIndex:0,phase:'planning',selected:new Set(),plan:[],sim:null,c
 const OPS=CITY_OPS,operatingDays=OPS.days.length,opsKey=storageKey+'-ops';
 const lessonKey=storageKey+'-lesson';
 let lessonCompletedHere=false;
-const stage=()=>state.ops?core.opsStage(OPS,state.ops.day,opsSt(state.phase!=='planning'&&state.ops.jam)):(stages[state.stageIndex]||CITY_TUTORIAL),busy=()=>['running','paused','event','handoff'].includes(state.phase),xy=p=>[72+p[0]*86,80+p[1]*80],position=()=>state.plan.length?core.positionOf(stage(),state.plan.at(-1)):stage().depot;
+const stage=()=>state.ops?coachStage(core.opsStage(OPS,state.ops.day,opsSt(state.phase!=='planning'&&state.ops.jam))):(stages[state.stageIndex]||CITY_TUTORIAL),busy=()=>['running','paused','event','handoff'].includes(state.phase),xy=p=>[72+p[0]*86,80+p[1]*80],position=()=>state.plan.length?core.positionOf(stage(),state.plan.at(-1)):stage().depot;
 const lesson=()=>!state.ops&&state.stageIndex===-1;
 const autoRoute=()=>stage().autoRoute!==false;
 const preview=()=>state.ops?core.evaluate(stage(),state.selected,state.plan,core.opsOptions(OPS,opsSt())):core.evaluate(stage(),state.selected,state.plan,{skipEvents:true}),available=i=>testMode||i===0||state.cleared.has(i)||state.cleared.has(i+1);
@@ -1781,14 +1781,14 @@ function switchStage(i){if(busy()||(i!==-1&&!available(i)))return;stop();state.o
 function normalize(){state.plan=core.normalizePlan(stage(),state.selected,state.plan);}
 function change(){state.phase='planning';state.sim=null;state.cursor=0;if(state.ops)opsReplan();normalize();render();tell('');}
 const earlyCenter=p=>lesson()&&!state.plan.length&&key(p)===key(stage().depot);
-function addNode(p){if(busy())return;if(earlyCenter(p)){$('nextAction').textContent='빵집을 먼저 눌러요. 그다음 배송 센터예요.';sfx?.play('blocked');return;}if(lesson()&&preview().success){tell("길이 완성됐어요. 배송 출발을 누르세요.");return;}if(lesson()&&(!stage().orders.some(o=>key([o.x,o.y])===key(p))&&key(p)!==key(stage().depot)))return;if(state.ops){const o=stage().orders.find(o=>key([o.x,o.y])===key(p));if(!o||state.ops.step!=='day'){tell('주문이 있는 집을 누르면 주문을 받거나 뺄 수 있어요. 길은 자동으로 정해져요.');return;}state.selected.has(o.id)?state.selected.delete(o.id):state.selected.add(o.id);change();return;}const s=stage(),from=position();if(key(p)===key(from)){tell('지금 있는 곳이에요. 다음에 갈 곳을 눌러 주세요.',true);sfx?.play('blocked');return;}const near=core.exits(s,from).some(e=>key(e.position)===key(p));if(!near&&!autoRoute()){tell('이번 판은 길을 직접 골라요. 노란 점이 있는 교차로를 하나씩 눌러 이어 주세요.',true);sfx?.play('blocked');return;}state.history.push(state.plan.length);for(const q of near?[p]:core.routeTo(s,from,p))state.plan.push(key(q)===key(s.depot)?'W':'@'+key(q));change();}
+function addNode(p){if(busy())return;if(earlyCenter(p)){$('nextAction').textContent='빵집을 먼저 눌러요. 그다음 배송 센터예요.';sfx?.play('blocked');return;}if(lesson()&&preview().success){tell("길이 완성됐어요. 배송 출발을 누르세요.");return;}if(lesson()&&(!stage().orders.some(o=>key([o.x,o.y])===key(p))&&key(p)!==key(stage().depot)))return;if(state.ops){const o=stage().orders.find(o=>key([o.x,o.y])===key(p));if(!o||state.ops.step!=='day'){tell('주문이 있는 집을 누르면 주문을 받거나 뺄 수 있어요. 길은 자동으로 정해져요.');return;}if(coachPick(o.id))return;state.selected.has(o.id)?state.selected.delete(o.id):state.selected.add(o.id);change();return;}const s=stage(),from=position();if(key(p)===key(from)){tell('지금 있는 곳이에요. 다음에 갈 곳을 눌러 주세요.',true);sfx?.play('blocked');return;}const near=core.exits(s,from).some(e=>key(e.position)===key(p));if(!near&&!autoRoute()){tell('이번 판은 길을 직접 골라요. 노란 점이 있는 교차로를 하나씩 눌러 이어 주세요.',true);sfx?.play('blocked');return;}state.history.push(state.plan.length);for(const q of near?[p]:core.routeTo(s,from,p))state.plan.push(key(q)===key(s.depot)?'W':'@'+key(q));change();}
 function buildingText(o){const t=core.deliveryTime(o);if(o.building.floor<=1)return `전달 ${t}분`;return `${o.building.floor}층 · ${o.building.floor<=1?'1층 전달':o.building.elevator?'엘리베이터 있음':'엘리베이터 없음 · 계단'} · 건물 안 ${t}분`;}
 function render(){const s=stage();$('testNotice').hidden=!testMode;$('stages').innerHTML='<button class="stage practice '+(lesson()?'active':'')+'" data-stage="-1" '+(busy()?'disabled':'')+' aria-current="'+(lesson()?'step':'false')+'">연습</button>'+stages.map((v,i)=>`<button class="stage ${i===state.stageIndex&&!state.ops?'active':''} ${state.cleared.has(v.id)?'done':''}" data-stage="${i}" ${!available(i)||busy()?'disabled':''} aria-label="${v.id}단계 ${esc(v.title)}" aria-current="${i===state.stageIndex&&!state.ops?'step':'false'}">${v.id}<span class="label"> ${esc(v.title)}</span></button>`).join('')+`<button class="stage ops ${state.ops?'active':''} ${state.ops?.step==='done'?'done':''}" data-ops ${!opsAvailable()||busy()?'disabled':''} aria-label="${operatingDays}일 운영">${operatingDays}일 운영</button>`;$('focus').textContent=lesson()?'연습 배송':`배송 ${s.id} / ${stages.length} · ${s.focus}`;$('stageTitle').textContent=s.title;$('stageInstruction').textContent=s.instruction;$('orderCount').textContent=`${s.orders.length}건`;$('orderIntro').textContent=s.required?'이번 판은 모든 주문을 배송해요.':'받을 주문을 체크하세요. 고른 주문은 모두 배송해야 해요.';$('roadLegend').textContent=!autoRoute()?'큰길 한 칸 1분 · 골목 한 칸 2분 · 주황색 점을 하나씩 눌러 길을 직접 고르세요.':'길 한 칸 1분 · 가게나 배송 센터를 누르면 가까운 길로 이어져요. 다른 길로 가려면 길 위의 점을 눌러요.';$('opsChoice').hidden=true;$('orderNews').hidden=true;$('routeNote').hidden=!!state.ops;$('stageInstruction').hidden=!!state.ops||lesson();$('routeLabel').textContent=state.ops?'배송 경로':'내가 이은 길';if(state.ops)renderOps();renderOrders();renderRoute();renderMetrics();renderMap();renderControls();renderEventForecast();renderGuide();}
 function active(){return state.sim&&(busy()||state.phase==='result')?state.sim.trace[state.cursor]:null;}
 function renderOrders(){
  const orders=$('orders'),parking=$('opsChoice'),resident=state.ops&&OPS.days[state.ops.day].resident;
  parking.remove();
- const done=new Set(active()?.delivered||[]),s=stage(),times=opsOrderTimes(s),lock=s.required||busy()||(state.ops&&state.ops.step!=='day');orders.innerHTML=s.orders.map(o=>`<label data-fixed="${s.required}" data-key="${key([o.x,o.y])}" class="order ${state.selected.has(o.id)?'selected':''} ${done.has(o.id)?'done':''}"><input type="checkbox" data-order="${o.id}" ${times[o.id]?`aria-describedby="orderTime-${o.id}"`:''} aria-label="${esc(o.id+' '+o.name)} 주문 받기" ${state.selected.has(o.id)?'checked':''} ${lock?'disabled':''}>${icon(o.sprite||'house','thumb')}<span class="name"><b>${o.id}</b> ${esc(o.name)}${done.has(o.id)?' ✓':''}<small>${s.required?(active()?(done.has(o.id)?'배송 완료':'배송할 상자'):state.plan.includes(o.id)?'길 연결됨':'길을 이을 곳'):buildingText(o)}${s.capacity<99?` · 짐 ${o.size}칸`:''}${o.id===resident&&!state.selected.has(o.id)?' · 주차 선택':''}</small>${times[o.id]?`<strong id="orderTime-${o.id}" class="order-time ${times[o.id].over?'over':''}">${orderTimeLabel(times[o.id])}</strong>`:''} </span><span class="coins">${icon('icon-coin','ico')}${o.reward}</span><span class="tick" aria-hidden="true"></span></label>`).join('');
+ const done=new Set(active()?.delivered||[]),s=stage(),times=opsOrderTimes(s),lock=s.required||busy()||(state.ops&&state.ops.step!=='day');orders.innerHTML=s.orders.map(o=>`<label data-fixed="${s.required}" data-key="${key([o.x,o.y])}" class="order ${state.selected.has(o.id)?'selected':''} ${done.has(o.id)?'done':''}"><input type="checkbox" data-order="${o.id}" ${times[o.id]?`aria-describedby="orderTime-${o.id}"`:''} aria-label="${esc(o.id+' '+o.name)} 주문 받기" ${state.selected.has(o.id)?'checked':''} ${lock||(coaching()&&coachTargets[state.ops.coach]!==o.id)?'disabled':''}>${icon(o.sprite||'house','thumb')}<span class="name"><b>${o.id}</b> ${esc(o.name)}${done.has(o.id)?' ✓':''}<small>${s.required?(active()?(done.has(o.id)?'배송 완료':'배송할 상자'):state.plan.includes(o.id)?'길 연결됨':'길을 이을 곳'):buildingText(o)}${s.capacity<99?` · 짐 ${o.size}칸`:''}${o.id===resident&&!state.selected.has(o.id)?' · 주차 선택':''}</small>${times[o.id]?`<strong id="orderTime-${o.id}" class="order-time ${times[o.id].over?'over':''}">${orderTimeLabel(times[o.id])}</strong>`:''} </span><span class="coins">${icon('icon-coin','ico')}${o.reward}</span><span class="tick" aria-hidden="true"></span></label>`).join('');
  const parkingOrder=resident&&orders.querySelector(`[data-order="${resident}"]`)?.closest('.order');
  if(!parking.hidden&&parkingOrder)parkingOrder.after(parking);else orders.after(parking);
  const selected=s.orders.filter(o=>state.selected.has(o.id));$('selectedTotal').textContent=`선택 ${selected.length}/${s.orders.length}`;}
@@ -2285,13 +2285,13 @@ function mountStreetResidents({THREE,group,material,merge,box,mesh,map,project,c
  setTimeout(tick,100);
  return ()=>draw(performance.now(),true);
 }
-function canClearOrders(){return state.ops?.step==='day'&&state.phase==='planning'&&state.selected.size>0;}
+function canClearOrders(){return !coaching()&&state.ops?.step==='day'&&state.phase==='planning'&&state.selected.size>0;}
 function renderControls(){
  const clearable=canClearOrders();
  for(const button of [$('clearMapOrders'),$('clearBookOrders')]){
   button.hidden=button.disabled=!clearable;
  }
- $('undoButton').disabled=busy()||!state.plan.length;$('clearButton').disabled=busy()||!state.plan.length;$('startButton').disabled=['event','handoff'].includes(state.phase)||(!busy()&&(!state.selected.size||!state.plan.length||(lesson()&&!preview().success)||(state.ops&&state.ops.step!=='day')||opsOver()));$('undoButton').hidden=$('clearButton').hidden=!!state.ops;$('startButton').innerHTML=state.phase==='running'?'일시정지':state.phase==='paused'?'계속 배송하기':state.phase==='event'?'현장 대응 선택 중':state.phase==='handoff'?'빵집에 도착했어요':opsOver()?'시간 초과 · 출발 불가':icon('van','govan')+'배송 출발!';$('trafficScenario').disabled=busy();}
+ $('undoButton').disabled=busy()||!state.plan.length;$('clearButton').disabled=busy()||!state.plan.length;$('startButton').disabled=coaching()||['event','handoff'].includes(state.phase)||(!busy()&&(!state.selected.size||!state.plan.length||(lesson()&&!preview().success)||(state.ops&&state.ops.step!=='day')||opsOver()));$('undoButton').hidden=$('clearButton').hidden=!!state.ops;$('startButton').innerHTML=coaching()?'배차 연습 중':state.phase==='running'?'일시정지':state.phase==='paused'?'계속 배송하기':state.phase==='event'?'현장 대응 선택 중':state.phase==='handoff'?'빵집에 도착했어요':opsOver()?'시간 초과 · 출발 불가':icon('van','govan')+'배송 출발!';$('trafficScenario').disabled=busy();}
 const courierText=text=>text.replaceAll('물류센터','배송 센터').replaceAll('배달','배송').replaceAll('전달 완료','배송 완료');
 function traceMessage(a){return a.kind==='depot'&&state.cursor===state.sim.trace.length-1?'오늘 배송 끝':courierText(a.message);}
 let stepDue=0,stepLength=0,remainingStep=1;
@@ -2368,7 +2368,7 @@ function pauseDelivery(){
  state.phase='paused';stop();renderControls();renderGuide();renderMap();
 }
 function resumeDelivery(){state.phase='running';renderControls();renderGuide();renderMap();advance();}
-function start(){if(['event','handoff'].includes(state.phase))return;if(state.phase==='running'){pauseDelivery();tell('');return;}if(state.phase==='paused'){resumeDelivery();return;}remainingStep=1;if(!state.selected.size||!state.plan.length||opsOver()||(lesson()&&!preview().success))return;state.decisions={};state.baseline=preview();state.sim=actual();state.cursor=0;state.phase='running';render();tell('');advance();}
+function start(){if(coaching())return;if(['event','handoff'].includes(state.phase))return;if(state.phase==='running'){pauseDelivery();tell('');return;}if(state.phase==='paused'){resumeDelivery();return;}remainingStep=1;if(!state.selected.size||!state.plan.length||opsOver()||(lesson()&&!preview().success))return;state.decisions={};state.baseline=preview();state.sim=actual();state.cursor=0;state.phase='running';render();tell('');advance();}
 function finish(){stop();state.phase='result';if(state.ops)return finishDay();const r=state.sim;if(r.success&&lesson()){try{localStorage.setItem(storageKey+'-lesson','done');}catch{}}
  if(r.success&&!lesson()){state.cleared.add(stage().id);try{localStorage.setItem(storageKey,JSON.stringify([...state.cleared]));}catch{}}$('resultArt').innerHTML=icon(r.success?'icon-coin':'icon-box','receipt-art');$('resultTitle').textContent=r.success?(lesson()?'첫 배송 성공!':'배송 완료!'):'배송 계획을 고쳐 보세요';$('resultMessage').textContent=r.success?(lesson()?'빵집에 상자를 전하고 배송 센터로 돌아왔어요.':'받은 주문을 모두 전하고 시간 안에 센터로 돌아왔어요.'):recovery(r);$('resultTime').textContent=(stage().event?'기본 예상 '+state.baseline.plannedTime+'분 → 실제 ':'')+r.time+' / '+stage().timeLimit+'분';$('resultReward').textContent=r.reward+' / '+stage().target+'코인';$('resultBreakdown').hidden=!stage().event;$('resultBreakdown').textContent='배송료 '+r.grossReward+' − 낸 돈 '+r.expense+' = 순수입 '+r.reward+'코인';$('resultInsight').textContent=r.success?(lesson()?'이제 우리 회사를 운영해요. 받을 주문은 직접 골라요.':stage().insight):'계획 고치기를 누르면 방금 이은 길에서 다시 시작해요.';state.fails[stage().id]=r.success?0:(state.fails[stage().id]||0)+1;const hint=!r.success&&state.fails[stage().id]>=2&&stage().hint;$('resultHint').hidden=!hint;$('resultHint').textContent=hint?'힌트 · '+hint:'';$('nextButton').hidden=!r.success;$('nextButton').textContent=lesson()?`${operatingDays}일 운영 시작`:state.stageIndex===stages.length-1?`${operatingDays}일 운영 시작`:`${state.stageIndex+2}판으로 가기`;renderCompare(r);renderControls();$('resultDialog').showModal();$(r.success?'nextButton':'retryButton').focus();}
 function renderCompare(r){const s=stage(),rows=[],line=(label,text)=>`<div><b>${label}</b><span>${text}</span></div>`,list=os=>os.map(o=>`${o.id} ${esc(o.name)} ${o.reward}코인`).join(' · ')||'없음',outcome=x=>x.issues.some(i=>i.code==='time')?`제한 ${s.timeLimit}분을 넘김 · 실패`:`${x.time}분 · ${s.event?.type==='resident'?'순수입 ':''}${x.reward}코인 · ${x.success?'성공':'실패'}`;
@@ -2384,7 +2384,7 @@ document.addEventListener('contextmenu',event=>{
  if(event.target.closest('button,summary,.order,.ops-choice label,#map,#map3d'))event.preventDefault();
 });
 
-$('map').addEventListener('click',e=>{const n=e.target.closest('[data-node]');if(n)addNode(n.dataset.node.split(',').map(Number));});$('map').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const n=e.target.closest('[data-node]');if(n){e.preventDefault();const at=n.dataset.node;addNode(at.split(',').map(Number));if(lesson()&&preview().success)$('startButton').focus();else if(state.ops)$('map').querySelector('[data-node="'+at+'"]')?.focus({preventScroll:true});else ($('map').querySelector('.cue')||$('map').querySelector('.node[aria-disabled="false"]')||$('map').querySelector(`[data-node="${at}"]`))?.focus();}}});$('orders').addEventListener('change',e=>{const id=e.target.dataset.order;if(!id||busy()||stage().required)return;const focused=document.activeElement===e.target;e.target.checked?state.selected.add(id):state.selected.delete(id);change();if(focused)$('orders').querySelector(`[data-order="${id}"]`)?.focus({preventScroll:true});});$('stages').addEventListener('click',e=>{const b=e.target.closest('[data-stage]');if(busy())return;const ops=e.target.closest('[data-ops]');if(!b&&!ops)return;closeWorldDialog('gameMenu');if(b)switchStage(Number(b.dataset.stage));else enterOps();if(!document.querySelector('dialog[open]'))$('stageTitle').focus({preventScroll:true});});$('routeSteps').addEventListener('click',e=>{const b=e.target.closest('[data-trim]');if(b&&!busy()&&!state.ops&&!lesson()){state.plan=state.plan.slice(0,Number(b.dataset.trim)+1);state.history=state.history.filter(n=>n<state.plan.length);change();}});$('undoButton').onclick=()=>{if(!busy()){const n=state.history.pop();state.plan=state.plan.slice(0,n??state.plan.length-1);change();}};$('clearButton').onclick=()=>{if(!busy()){state.plan=[];state.history=[];change();}};$('startButton').onclick=start;$('helpButton').onclick=()=>{if(state.phase==='handoff')return;$('helpDuration').textContent=`${operatingDays}일`;$('helpDialog').showModal();};$('helpClose').onclick=()=>$('helpDialog').close();$('retryButton').onclick=backToPlan;$('nextButton').onclick=()=>{$('resultDialog').close();state.phase='planning';if(state.stageIndex===stages.length-1)enterOps();else switchStage(state.stageIndex+1);};$('resultDialog').addEventListener('cancel',e=>{e.preventDefault();backToPlan();});document.querySelectorAll('[data-speed]').forEach(b=>b.onclick=()=>{state.speed=Number(b.dataset.speed);sfx?.setRate(state.speed);document.querySelectorAll('[data-speed]').forEach(n=>n.setAttribute('aria-pressed',String(n===b)));});
+$('map').addEventListener('click',e=>{const n=e.target.closest('[data-node]');if(n)addNode(n.dataset.node.split(',').map(Number));});$('map').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const n=e.target.closest('[data-node]');if(n){e.preventDefault();const at=n.dataset.node;addNode(at.split(',').map(Number));if(lesson()&&preview().success)$('startButton').focus();else if(state.ops)$('map').querySelector('[data-node="'+at+'"]')?.focus({preventScroll:true});else ($('map').querySelector('.cue')||$('map').querySelector('.node[aria-disabled="false"]')||$('map').querySelector(`[data-node="${at}"]`))?.focus();}}});$('orders').addEventListener('change',e=>{const id=e.target.dataset.order;if(!id||busy()||stage().required)return;const focused=document.activeElement===e.target;if(coachPick(id)){if(focused)($('orders').querySelector('input:not(:disabled)')||$('bookCoachExit')).focus({preventScroll:true});return;}e.target.checked?state.selected.add(id):state.selected.delete(id);change();if(focused)$('orders').querySelector(`[data-order="${id}"]`)?.focus({preventScroll:true});});$('stages').addEventListener('click',e=>{const b=e.target.closest('[data-stage]');if(busy())return;const ops=e.target.closest('[data-ops]');if(!b&&!ops)return;closeWorldDialog('gameMenu');if(b)switchStage(Number(b.dataset.stage));else enterOps();if(!document.querySelector('dialog[open]'))$('stageTitle').focus({preventScroll:true});});$('routeSteps').addEventListener('click',e=>{const b=e.target.closest('[data-trim]');if(b&&!busy()&&!state.ops&&!lesson()){state.plan=state.plan.slice(0,Number(b.dataset.trim)+1);state.history=state.history.filter(n=>n<state.plan.length);change();}});$('undoButton').onclick=()=>{if(!busy()){const n=state.history.pop();state.plan=state.plan.slice(0,n??state.plan.length-1);change();}};$('clearButton').onclick=()=>{if(!busy()){state.plan=[];state.history=[];change();}};$('startButton').onclick=start;$('helpButton').onclick=()=>{if(state.phase==='handoff')return;$('helpDuration').textContent=`${operatingDays}일`;$('helpDialog').showModal();};$('helpClose').onclick=()=>$('helpDialog').close();$('retryButton').onclick=backToPlan;$('nextButton').onclick=()=>{$('resultDialog').close();state.phase='planning';if(state.stageIndex===stages.length-1)enterOps();else switchStage(state.stageIndex+1);};$('resultDialog').addEventListener('cancel',e=>{e.preventDefault();backToPlan();});document.querySelectorAll('[data-speed]').forEach(b=>b.onclick=()=>{state.speed=Number(b.dataset.speed);sfx?.setRate(state.speed);document.querySelectorAll('[data-speed]').forEach(n=>n.setAttribute('aria-pressed',String(n===b)));});
 
 function renderEventForecast(){const e=state.ops?null:stage().event;$('eventForecast').hidden=!e;$('eventForecast').textContent=!e?'':e.type==='traffic'?'사전 안내 · 중앙대로 동쪽 정체 가능, 추가 0~6분. 발생하면 우회하거나 현재 도로로 이동합니다. 재도전은 같은 정체 조건입니다.':'사전 안내 · A단지 차량 진입 제한. 현장 대응에 따라 1~4분 추가, 정산 비용 0~3코인이 생깁니다.';$('scenarioControl').hidden=!(testMode&&e?.type==='traffic');$('trafficScenario').value=String(trafficDelay);}
 $('eventChoices').addEventListener('click',e=>{const b=e.target.closest('[data-choice]');if(b)chooseEvent(b.dataset.choice);});$('eventDialog').addEventListener('cancel',e=>e.preventDefault());$('trafficScenario').onchange=e=>{if(busy())return;trafficDelay=Number(e.target.value);try{localStorage.setItem(storageKey+'-traffic-delay',String(trafficDelay));}catch{}change();};
@@ -2402,7 +2402,7 @@ function openWorldDialog(id,origin=$(worldDialogs[id])){
  if(id==='gameMenu'){
   $('terminalMission').textContent=$('stageTitle').textContent;
   $('mapModeButton').hidden=!view3d;
-  $('reviewBriefing').hidden=!state.ops;
+  $('reviewBriefing').hidden=!state.ops||coaching();
   $('stages').inert=busy();
   for(const button of $('stages').querySelectorAll('button')){
    button.disabled=busy()||(button.hasAttribute('data-ops')?!opsAvailable():button.dataset.stage!=='-1'&&!available(Number(button.dataset.stage)));
@@ -2634,7 +2634,7 @@ function showSaveUnavailable(){
 function opsSave(){
  const o=state.ops;
  if(!o)return;
- if(o.step==='day')o.selected=[...state.selected];
+ if(o.step==='day')o.selected=coaching()?[]:[...state.selected];
  try{localStorage.setItem(opsKey,JSON.stringify(o));}catch{showSaveUnavailable();}
 }
 // 배송 도중 창을 닫아도 주문과 주차는 남긴다. 운행 자체는 계획 화면에서 다시 출발한다.
@@ -2642,6 +2642,34 @@ function saveDayPlan(){if(state.ops?.step==='day')opsSave();}
 window.addEventListener('pagehide',saveDayPlan);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveDayPlan();});
 function opsNew(){return {v:4,day:0,money:0,resident:'walk',log:[],step:'day',ruleSeen:{}};}
+const coachPicks=['','A','AB','ABD','AB'],coachTargets=['A','B','D','D'];
+function coaching(){return state.ops?.day===0&&state.ops.step==='day'&&Number.isInteger(state.ops.coach)&&coachPicks[state.ops.coach]!==undefined;}
+function coachStage(s){
+ if(coaching()){
+  const ids=['A','AB','ABD','ABD','AB'][state.ops.coach];
+  s.orders=s.orders.filter(order=>ids.includes(order.id));
+ }
+ return s;
+}
+function coachPick(id){
+ if(!coaching())return false;
+ const o=state.ops;
+ if(id===coachTargets[o.coach]){
+  o.coach++;
+  state.selected=new Set(coachPicks[o.coach]);
+  change();opsSave();
+ }else tell($('nextAction').textContent);
+ return true;
+}
+function finishCoach(){
+ if(!coaching())return;
+ if($('orderBook').open)closeWorldDialog('orderBook');
+ const o=state.ops;
+ delete o.coach;
+ o.selected=[];
+ openOps(o);
+}
+$('coachExit').onclick=$('bookCoachExit').onclick=finishCoach;
 function opsOver(){return !!state.ops&&state.phase==='planning'&&preview().plannedTime>limitOf(state.ops.day);}
 function lessonDone(){try{return lessonCompletedHere||localStorage.getItem(lessonKey)==='done';}catch{return lessonCompletedHere;}}
 $('nextButton').addEventListener('click',()=>{
@@ -2662,6 +2690,7 @@ function readOps(){
 function describeOps(o){
  const where=o.step==='done'&&o.reportSeen!==false?'운영 결과 카드':
   `${o.day+1}일차 ${o.step==='day'?(o.ruleSeen[o.day]?'배송 계획':'아침 규칙'):'장부'}`;
+ if(o.day===0&&Number.isInteger(o.coach))return '기사와 배차 연습 · 이어서 하기';
  return `${where} · 회사에 ${o.money}코인`;
 }
 function confirmNewGame(){
@@ -2741,7 +2770,9 @@ function openOps(o){
  stop();
  $('gameMenu').querySelector('details').open=false;
  state.ops=o;state.phase='planning';state.selected=new Set();state.plan=[];state.sim=null;state.decisions={};state.cursor=0;
- if(o.step==='day'&&Array.isArray(o.selected)){
+ if(coaching()){
+  state.selected=new Set(coachPicks[o.coach]);opsReplan();
+ }else if(o.step==='day'&&Array.isArray(o.selected)){
   state.selected=new Set(stage().orders.map(order=>order.id).filter(id=>o.selected.includes(id)));
   opsReplan();
  }
@@ -2750,7 +2781,7 @@ function openOps(o){
  else if(o.step==='done')showReport();
  else{
   opsSave();
-  if(!o.ruleSeen[o.day])showRule();
+  if(!coaching()&&!o.ruleSeen[o.day])showRule();
  }
 }
 function enterOps(){
@@ -2760,7 +2791,7 @@ function enterOps(){
   return;
  }
  const savedOps=readOps();
- if(!savedOps){openOps(opsNew());return;}
+ if(!savedOps){openOps({...opsNew(),coach:0});return;}
  if(!lesson())switchStage(-1);
  const dialog=document.createElement('dialog');
  dialog.id='opsResume';dialog.className='rule-card';
@@ -2791,7 +2822,9 @@ function opsRoute(s,ids,st){
  const cacheKey=[parking,sorted.join(',')].join(':');
  if(!routePlans.has(cacheKey)){
   const result=core.planRoute(s,sorted,core.opsOptions(OPS,st));
-  routePlans.set(cacheKey,result&&{plan:result.plan,time:result.time,grossReward:result.result.grossReward,expense:result.result.expense});
+  // evaluate groups deliveries between depot tokens. Empty departures carry no new boxes.
+  const reloads=result?Math.max(0,result.result.loads.filter(load=>load.size>0).length-1):0;
+  routePlans.set(cacheKey,result&&{plan:result.plan,reloads,time:result.time,grossReward:result.result.grossReward,expense:result.result.expense});
  }
  return routePlans.get(cacheKey);
 }
@@ -2801,13 +2834,14 @@ function opsReplan(){
 function opsOrderTimes(s){
  const o=state.ops;
  if(!o||o.step!=='day'||state.phase!=='planning')return {};
- const st=opsSt(),ids=[...state.selected],signature=[o.day,st.blocked,st.resident,ids.slice().sort().join(',')].join(':');
+ const st=opsSt(),ids=[...state.selected],signature=[o.day,o.coach,st.blocked,st.resident,ids.slice().sort().join(',')].join(':');
  if(signature===orderTimeKey)return orderTimes;
  const current=ids.length?opsRoute(s,ids,st):null,limit=limitOf(o.day);
  orderTimes=Object.fromEntries(s.orders.map(order=>{
   const selected=state.selected.has(order.id);
-  const time=(selected?current:opsRoute(s,[...ids,order.id],st))?.time??null;
-  return [order.id,{time,selected,over:time!==null&&time>limit}];
+  const route=selected?current:opsRoute(s,[...ids,order.id],st);
+  const time=route?.time??null;
+  return [order.id,{time,selected,reloads:route?.reloads??0,over:time!==null&&time>limit}];
  }));
  orderTimeKey=signature;
  return orderTimes;
@@ -2815,7 +2849,7 @@ function opsOrderTimes(s){
 function orderTimeLabel(info){
  if(!info)return '';
  const {time,selected,over}=info;
- return time===null?'경로 없음':(selected?'현재 총 ':'포함 총 ')+time+'분'+(over?' · 시간 초과':'');
+ return time===null?'경로 없음':(selected?'현재 총 ':'포함 총 ')+time+'분'+(over?' · 시간 초과':'')+(info.reloads?' · 센터에서 다시 싣기 '+info.reloads+'회':'');
 }
 function renderOps(){const o=state.ops,day=OPS.days[o.day],lost=core.opsLost(OPS,o.day,opsSt());$('focus').textContent=`${operatingDays}일 운영 · ${o.day+1}일차 / ${operatingDays}`;$('stageTitle').textContent=day.title;
  const news=$('orderNews');news.hidden=!lost.length;news.textContent=lost.length?lostNews(lost.length):'';
@@ -2853,7 +2887,7 @@ function renderTripComparison(){
    const separate=singles.reduce((minutes,trip)=>minutes+trip.time,0);
    const saved=separate-combined.time;
    const difference=saved>0?saved+'분 절약':saved<0?(-saved)+'분 더 걸림':'시간 같음';
-   summary=`따로 ${separate}분 · 묶으면 ${combined.time}분 · <b>${difference}</b><small>${saved>0?'겹치는 왕복길을 줄였어요.':'각 주문을 센터에서 왕복한 시간과 비교해요.'}</small>`;
+   summary=`따로 ${separate}분 · 묶으면 ${combined.time}분 · <b>${difference}</b><small>${combined.reloads?'센터에서 다시 싣기 '+combined.reloads+'회':'한 번에 싣고 배송'} · ${combined.time>limitOf(state.ops.day)?'시간 초과':'출발 가능'}</small>`;
   }
  }
  for(const box of [$('hudTripCompare'),$('bookTripCompare')]){
@@ -3015,8 +3049,27 @@ function renderGuide(){
  document.body.classList.toggle('lesson',lesson());
  document.body.classList.toggle('no-load',s.capacity>=99);
  $('selectedTotal').hidden=s.required;
- $('orderIntro').textContent=state.ops?'표시된 시간은 이 주문을 포함해 센터에 돌아올 때까지예요.':'받을 주문을 고른 뒤 지도에서 길을 이어요.';
+ $('orderIntro').textContent=state.ops?'2칸이 차면 다음 짐은 센터에서 다시 실어요. 주문마다 왕복 시간을 확인해요.':'받을 주문을 고른 뒤 지도에서 길을 이어요.';
  $('orderIntro').hidden=s.required;
+ for(const button of [$('coachExit'),$('bookCoachExit')]){
+  button.hidden=!coaching();
+  if(coaching())button.textContent=state.ops.coach===4?'첫날 배차 시작':'연습 건너뛰기';
+ }
+ if(coaching()){
+  const step=state.ops.coach;
+  const line=[
+   'A 한빛빌라를 눌러 첫 주문을 받아 봐요.',
+   `왕복 ${p.plannedTime}분에 받을 배송료는 ${p.grossReward}코인, 기사 일당은 하루 ${wage()}코인이에요. 같은 서쪽의 B도 눌러 봐요.`,
+   '따로 16분, 함께 가면 12분이에요. D를 눌러 세 번째 짐도 실어 볼까요?',
+   '세 상자는 2칸에 다 안 들어가요. 센터에서 다시 싣고 오면 25분! 20분을 넘으니 D를 다시 눌러 빼 봐요.',
+   '다시 12분! 주문을 빼서 시간을 맞췄어요. 이제 빈 수첩으로 첫날을 시작해요.'
+  ][step];
+  $('focus').textContent='기사와 배차 연습 · '+Math.min(step+1,4)+'/4';
+  $('stageTitle').textContent='연습 배차실';
+  guide.textContent=line;
+  $('orderIntro').textContent='기사와 배차 연습 · '+line;
+  $('orderTimeHint').hidden=true;
+ }
  renderCargoTrips(s,p);
  const actions=$('mapActions');
  actions.hidden=playing||!!state.ops||(lesson()&&p.success);
