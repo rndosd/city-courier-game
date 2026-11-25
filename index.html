@@ -1098,8 +1098,8 @@ dialog:not(#gameMenu) button.primary:not(:disabled) {
 #gameScreen #map .tag.on .pin-time { fill:#263d3e; }
 #gameScreen #map .pin-time.over { paint-order:stroke; stroke:#fff0df; stroke-width:3px; fill:#84252a; }
 
-#gameScreen #map .shop:focus-visible { outline:none; }
-#gameScreen #map .shop:focus-visible :is(.tag>rect,.cue-tag>rect,.depot-sign) {
+#gameScreen #map .shop { outline:none; }
+#gameScreen #map .shop:focus :is(.tag>rect,.cue-tag>rect,.depot-sign) {
  stroke:#164d51; stroke-width:6px; filter:drop-shadow(0 0 2px #fff2b4);
 }
 </style></head>
@@ -1864,7 +1864,7 @@ const PRACTICE_STREET_SCENERY=[
 function fitMap2d(){
  const map=$('map'),aspect=map.clientWidth/map.clientHeight;
  if(!aspect||!Number.isFinite(aspect))return;
- const [x,y,w,h]=lesson()?[92,56,652,356]:state.ops?[18,-3,806,608]:[0,0,860,600];
+ const [x,y,w,h]=lesson()?[92,56,652,356]:state.ops?[18,-87,806,684]:[0,0,860,600];
  const width=Math.max(w,h*aspect),height=Math.max(h,w/aspect);
  map.setAttribute('viewBox',[x-(width-w)/2,y-(height-h)/2,width,height].join(' '));
 }
