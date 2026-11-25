@@ -272,8 +272,14 @@ dialog button.primary { background:var(--ui-accent); }
 }
 #reportDialog .report-actions { display:flex; gap:8px; }
 #reportDialog .report-actions button { flex:1; min-width:0; }
-#reportScore { display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:8px; background:#213f41; color:#fff4d4; border:2px solid #a08a54; border-radius:12px; overflow:hidden; }
+#reportScore { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0; margin-bottom:8px; background:#213f41; color:#fff4d4; border:2px solid #a08a54; border-radius:12px; overflow:hidden; }
+#reportScore:has(#personalBest) { grid-template-columns:repeat(3,minmax(0,1fr)); }
 #reportScore div { display:grid; padding:6px 12px; }
+#dayRace { margin:5px 0; padding:5px 10px; border-radius:6px; font-weight:700; background:#ffdfa1; color:#392d1d; }
+@media(prefers-reduced-motion:no-preference){
+ #reportScore.record-pop .score-coin { animation:best-coin .48s ease-out; }
+ @keyframes best-coin { 45%{transform:translateY(-5px) rotate(15deg) scale(1.22)} }
+}
 #reportScore div+div { border-left:1px solid #64817b; }
 #reportScore strong { font:28px/1.1 'Do Hyeon UI',sans-serif; color:#ffda82; }
 #reportScore strong small { color:inherit; font-size:14px; margin-left:3px; }
@@ -1328,8 +1334,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 <h3 class="truck-example">상자 3개를 실으면</h3>
 <div class="truck-keys"><button id="keepTruck" type="button"></button><button id="buyTruck" type="button"></button></div>
 </dialog>
-<dialog id="dayDialog" aria-labelledby="dayTitle"><h2 id="dayTitle" tabindex="-1" autofocus></h2><p id="dayDeliveryStamp" class="delivery-stamp" hidden></p><div class="ledger-body" tabindex="0" role="region" aria-label="장부 상세"><div id="daySummary" class="compare"></div><details class="ledger-orders"><summary>오늘 주문과 주차 내역</summary><div id="dayCompare" class="compare"></div></details></div><div id="evening" class="ledger-actions" hidden><button class="primary" id="nextDayButton">다음 날 시작</button></div><button class="primary ledger-actions" id="reportButton" hidden>결과 카드 보기</button></dialog>
-<dialog id="reportDialog" class="report" aria-labelledby="reportTitle"><small id="reportKicker"></small><h2 id="reportTitle" tabindex="-1" autofocus><span id="reportDuration" class="report-duration"></span> 동안 택배 회사에 남은 돈 <span id="reportMoney"></span></h2><p id="reportOutcome"></p><div class="report-body" tabindex="0" role="region" aria-label="결과 상세"><section id="reportScore" aria-label="5일 순이익 비교"></section><div id="reportFlow"></div><table id="reportDays"></table><div id="reportInvest" class="compare"></div><ul class="report-questions"><li>배송료는 누가 내고, 임금은 누가 받았나요?</li><li>기사에게 수당 없이 더 일해 달라고 할 수 있나요?</li><li>통행로를 막으면 다음 날 주문은 어떻게 달라지나요?</li></ul></div><div class="report-actions"><button id="restartOps">같은 주문으로 다시 도전</button><button class="primary" id="closeReport">닫기</button></div></dialog>
+<dialog id="dayDialog" aria-labelledby="dayTitle"><h2 id="dayTitle" tabindex="-1" autofocus></h2><p id="dayDeliveryStamp" class="delivery-stamp" hidden></p><div class="ledger-body" tabindex="0" role="region" aria-label="장부 상세"><div id="daySummary" class="compare"></div><p id="dayRace" hidden></p><details class="ledger-orders"><summary>오늘 주문과 주차 내역</summary><div id="dayCompare" class="compare"></div></details></div><div id="evening" class="ledger-actions" hidden><button class="primary" id="nextDayButton">다음 날 시작</button></div><button class="primary ledger-actions" id="reportButton" hidden>결과 카드 보기</button></dialog>
+<dialog id="reportDialog" class="report" aria-labelledby="reportTitle"><small id="reportKicker"></small><h2 id="reportTitle" tabindex="-1" autofocus><span id="reportDuration" class="report-duration"></span> 동안 택배 회사에 남은 돈 <span id="reportMoney"></span></h2><p id="reportOutcome"></p><div class="report-body" tabindex="0" role="region" aria-label="결과 상세"><section id="reportScore" aria-label="5일 순이익 비교"></section><div id="reportFlow"></div><table id="reportDays"></table><div id="reportInvest" class="compare"></div><ul class="report-questions"><li>배송료는 누가 내고, 임금은 누가 받았나요?</li><li>기사에게 수당 없이 더 일해 달라고 할 수 있나요?</li><li>통행로를 막으면 다음 날 주문은 어떻게 달라지나요?</li></ul></div><div class="report-actions"><button class="primary" id="restartOps">같은 주문으로 다시 도전</button><button id="closeReport">닫기</button></div></dialog>
 <script>const ATLAS={"cell":160,"sprites":{"bakery":{"x":0,"y":0,"w":120,"h":127,"cw":160,"ch":160,"ox":20,"oy":20},"flower":{"x":123,"y":0,"w":110,"h":127,"cw":160,"ch":160,"ox":25,"oy":20},"cafe":{"x":236,"y":0,"w":114,"h":127,"cw":160,"ch":160,"ox":23,"oy":20},"depot":{"x":353,"y":0,"w":117,"h":127,"cw":160,"ch":160,"ox":22,"oy":20},"fruit":{"x":473,"y":0,"w":125,"h":127,"cw":160,"ch":160,"ox":18,"oy":20},"stationery":{"x":601,"y":0,"w":125,"h":127,"cw":160,"ch":160,"ox":18,"oy":20},"shop-gift":{"x":729,"y":0,"w":129,"h":127,"cw":160,"ch":160,"ox":16,"oy":20},"house":{"x":861,"y":0,"w":134,"h":127,"cw":160,"ch":160,"ox":13,"oy":20},"villa":{"x":0,"y":130,"w":116,"h":127,"cw":160,"ch":160,"ox":22,"oy":20},"apartment":{"x":119,"y":130,"w":116,"h":127,"cw":160,"ch":160,"ox":22,"oy":20},"office":{"x":238,"y":130,"w":128,"h":127,"cw":160,"ch":160,"ox":16,"oy":20},"market":{"x":369,"y":130,"w":139,"h":126,"cw":160,"ch":160,"ox":11,"oy":21},"pedestrian":{"x":511,"y":130,"w":116,"h":118,"cw":160,"ch":160,"ox":22,"oy":29},"tree-pine":{"x":630,"y":130,"w":77,"h":97,"cw":160,"ch":160,"ox":42,"oy":50},"tree-round":{"x":710,"y":130,"w":84,"h":96,"cw":160,"ch":160,"ox":38,"oy":51},"bridge":{"x":797,"y":130,"w":127,"h":88,"cw":320,"ch":160,"ox":97,"oy":59},"icon-coin":{"x":927,"y":130,"w":80,"h":81,"cw":96,"ch":96,"ox":8,"oy":7},"icon-clock":{"x":0,"y":260,"w":68,"h":81,"cw":96,"ch":96,"ox":14,"oy":7},"icon-megaphone":{"x":71,"y":260,"w":80,"h":81,"cw":96,"ch":96,"ox":8,"oy":7},"icon-truck":{"x":154,"y":260,"w":81,"h":81,"cw":96,"ch":96,"ox":8,"oy":7},"icon-star":{"x":238,"y":260,"w":81,"h":79,"cw":96,"ch":96,"ox":8,"oy":9},"flyer":{"x":322,"y":260,"w":74,"h":79,"cw":160,"ch":160,"ox":43,"oy":68},"truck-big":{"x":399,"y":260,"w":105,"h":78,"cw":160,"ch":160,"ox":28,"oy":69},"truck-big-left":{"x":507,"y":260,"w":105,"h":78,"cw":160,"ch":160,"ox":28,"oy":69},"parking":{"x":615,"y":260,"w":93,"h":78,"cw":160,"ch":160,"ox":34,"oy":69},"loading-dock":{"x":711,"y":260,"w":105,"h":76,"cw":160,"ch":160,"ox":28,"oy":71},"icon-check":{"x":819,"y":260,"w":81,"h":72,"cw":96,"ch":96,"ox":8,"oy":16},"icon-piggy":{"x":903,"y":260,"w":81,"h":72,"cw":96,"ch":96,"ox":8,"oy":16},"icon-box":{"x":0,"y":344,"w":81,"h":70,"cw":96,"ch":96,"ox":8,"oy":18},"van":{"x":84,"y":344,"w":95,"h":69,"cw":160,"ch":160,"ox":33,"oy":78},"van-left":{"x":182,"y":344,"w":95,"h":69,"cw":160,"ch":160,"ox":33,"oy":78},"barrier":{"x":280,"y":344,"w":90,"h":62,"cw":160,"ch":160,"ox":35,"oy":85},"traffic-jam":{"x":373,"y":344,"w":71,"h":55,"cw":160,"ch":160,"ox":45,"oy":92},"bench":{"x":447,"y":344,"w":67,"h":49,"cw":160,"ch":160,"ox":47,"oy":98},"flowerbed":{"x":517,"y":344,"w":70,"h":47,"cw":160,"ch":160,"ox":45,"oy":100},"bush":{"x":590,"y":344,"w":65,"h":45,"cw":160,"ch":160,"ox":48,"oy":102},"cones":{"x":658,"y":344,"w":50,"h":45,"cw":160,"ch":160,"ox":55,"oy":102}}},sheetMaxProfits={"base":95,"bundle":133};</script><script>(function(root){
  'use strict';
  const key=p=>p.join(','), edgeKey=(a,b)=>[key(a),key(b)].sort().join('|');
@@ -1739,6 +1745,66 @@ const actual=()=>state.ops?core.evaluate(core.opsStage(OPS,state.ops.day,opsSt(s
 function tell(text,error=false){$('statusText').textContent=text;$('statusText').classList.toggle('error',error);}
 function stop(){if(timer!==null)clearTimeout(timer);timer=null;clearCourierCard();}
 
+// Store one cumulative balance per day. Older comparable retries may only know the final amount.
+const deviceBest=new Map();
+function recordPrefix(o){return storageKey+'-best-'+o.scoreRules+'-'+o.sheet+'-';}
+function comparableRun(o){return o?.scoreRules===1&&['base','bundle'].includes(o.sheet);}
+function validRecord(r){
+ return r&&Number.isSafeInteger(r.money)&&(r.days===null||
+  Array.isArray(r.days)&&r.days.length===5&&r.days.every(Number.isSafeInteger)&&r.days[4]===r.money);
+}
+function betterRecord(a,b){
+ if(!validRecord(b))return a;
+ return !a||b.money>a.money||(b.money===a.money&&!a.days&&b.days)?b:a;
+}
+function personalBest(o){
+ if(!comparableRun(o))return null;
+ const prefix=recordPrefix(o);
+ let best=deviceBest.get(prefix)??null;
+ // Separate score keys keep a concurrent lower finish from replacing a higher one.
+ try{
+  for(let i=0;i<localStorage.length;i++){
+   const key=localStorage.key(i);
+   if(!key?.startsWith(prefix))continue;
+   try{best=betterRecord(best,JSON.parse(localStorage.getItem(key)));}catch{}
+  }
+ }catch{}
+ if(best)deviceBest.set(prefix,best);
+ return best;
+}
+function rememberRecord(o,record){
+ const best=personalBest(o);
+ if(betterRecord(best,record)===best)return best;
+ const prefix=recordPrefix(o);
+ deviceBest.set(prefix,record);
+ try{localStorage.setItem(prefix+record.money,JSON.stringify(record));}catch{}
+ return record;
+}
+function prepareRecords(o){
+ if(!comparableRun(o))return;
+ // The previous release kept the last retry score without its daily ledger.
+ if(Number.isSafeInteger(o.previousProfit))rememberRecord(o,{money:o.previousProfit,days:null});
+ if(!Object.hasOwn(o,'rival'))o.rival=personalBest(o);
+ if(validRecord(o.rival))rememberRecord(o,o.rival);
+}
+function finishRecord(o){
+ if(!comparableRun(o)||o.step!=='done'||o.log.length!==5)return;
+ const days=o.log.map(e=>e.moneyBefore+e.net);
+ const record={money:o.money,days};
+ if(!validRecord(record))return;
+ if(!Object.hasOwn(o,'bestBeforeFinish')){
+  o.bestBeforeFinish=personalBest(o);
+  if(state.ops===o)opsSave(); // Freeze the verdict before publishing the score.
+ }
+ rememberRecord(o,record);
+}
+function recordVerdict(o){
+ if(!comparableRun(o)||!Object.hasOwn(o,'bestBeforeFinish'))return '';
+ const before=o.bestBeforeFinish;
+ if(!before)return '첫 기록';
+ if(o.money>before.money)return '개인 신기록!';
+ return o.money===before.money?'개인 최고 동점':'개인 최고 유지';
+}
 const sfx=window.CitySfx;
 const muteButton=$('muteButton');
 if(sfx){
@@ -2754,6 +2820,8 @@ function describeOps(o){
 }
 function confirmNewGame(){
  if(!window.confirm('지난 배송 기록을 지우고 연습부터 새로 시작할까요?'))return false;
+ const past=readOps();
+ if(past){prepareRecords(past);finishRecord(past);}
  try{localStorage.removeItem(opsKey);localStorage.removeItem(lessonKey);}catch{showSaveUnavailable();}
  lessonCompletedHere=false;
  return true;
@@ -2890,6 +2958,7 @@ function showRule(review=false){
 function openOps(o){
  stop();
  $('gameMenu').querySelector('details').open=false;
+ prepareRecords(o);
  state.ops=o;state.phase='planning';state.selected=new Set();state.plan=[];state.sim=null;state.decisions={};state.cursor=0;
  if(coaching()){
   state.selected=new Set(coachPicks[o.coach]);opsReplan();
@@ -2897,6 +2966,7 @@ function openOps(o){
   state.selected=new Set(stage().orders.map(order=>order.id).filter(id=>o.selected.includes(id)));
   opsReplan();
  }
+ finishRecord(o);
  render();window.scrollTo(0,0);tell('');
  if(o.step==='evening'||(o.step==='done'&&o.reportSeen===false))showDay(o.log.at(-1));
  else if(o.step==='done')showReport();
@@ -3039,7 +3109,7 @@ function renderOpsMetrics(){const s=stage(),p=preview(),a=active(),o=state.ops,l
 function altDay(change){const o=state.ops,st={...opsSt(),...change},ids=[...state.selected],r=opsRoute(core.opsStage(OPS,o.day,st),ids,st);if(!r)return null;return {...change,planned:r.time,time:r.time,net:core.opsSettle(OPS,{...r,time:OPS.days[o.day].overtime?r.time:Math.min(r.time,OPS.dayLimit)},truckCost()).net,ok:r.time<=limitOf(o.day)};}
 function finishDay(){const o=state.ops,s=stage(),r=state.sim,day=OPS.days[o.day],pick=x=>({id:x.id,name:x.name,reward:x.reward}),e={day:o.day,got:s.orders.filter(x=>state.selected.has(x.id)).map(pick),left:s.orders.filter(x=>!state.selected.has(x.id)).map(pick),lost:core.opsLost(OPS,o.day,opsSt()).map(pick),planned:state.baseline.plannedTime,time:r.time,...core.opsSettle(OPS,r,truckCost()),moneyBefore:o.money+truckCost(),deliveredCount:r.delivered.length};
  if(day.resident&&state.selected.has(day.resident)){e.resident=o.resident;e.alts=['walk','paid','block'].filter(x=>x!==o.resident).map(x=>altDay({resident:x}));}
- o.money=e.moneyBefore+e.net;o.log.push(e);o.step=o.day<OPS.days.length-1?'evening':'done';if(o.step==='done')o.reportSeen=false;opsSave();render();showDay(e,true);}
+ o.money=e.moneyBefore+e.net;o.log.push(e);o.step=o.day<OPS.days.length-1?'evening':'done';if(o.step==='done'){o.reportSeen=false;finishRecord(o);}opsSave();render();showDay(e,true);}
 const opsLine=(label,text)=>`<div><b>${label}</b><span>${text}</span></div>`,opsList=xs=>xs.map(x=>`${x.id} ${esc(x.name)} ${x.reward}코인`).join(' · ')||'없음',residentName=r=>({walk:'걸어가기',paid:'돈 내고 짐 내리기',block:'통행로에 세우기'})[r];
 function alternativeText(label,alt){if(!alt)return `${label} · 이 주문들로는 길을 짤 수 없어요`;if(!alt.ok)return `${label} · ${alt.planned}분이라 출발할 수 없었어요`;return `${label} · ${alt.time}분 · 오늘 남는 돈 ${alt.net}코인`;}
 function showDay(e,fresh=false){const o=state.ops;$('dayTitle').textContent=`${e.day+1}일차 마감 · 오늘의 장부`;
@@ -3050,6 +3120,11 @@ function showDay(e,fresh=false){const o=state.ops;$('dayTitle').textContent=`${e
  stamp.style.setProperty('--courier-duration',300/state.speed+'ms');
  stamp.classList.toggle('is-stamping',fresh);
  $('daySummary').innerHTML=`<p class="ledger-summary">기사에게 ${e.wage+(e.overtimePay||0)}코인 지급 · 회사에 ${signed(e.net)}코인</p>`+opsLine('기사가 일한 시간',`${e.time}분${e.overtime?` (${OPS.dayLimit}분 + 더 일한 ${e.overtime}분)`:` / ${OPS.dayLimit}분`}`)+opsLine('주민이 낸 배송료',`+${e.gross}코인`)+(e.expense?opsLine('짐 내리는 곳 요금',`−${e.expense}코인`):'')+(e.day===3&&e.investment!==undefined?opsLine('탑차 투자비',e.investment?`−${e.investment}코인`:'0코인 (2칸 유지)'):'')+opsLine('기사 일당',`−${e.wage}코인`)+(e.overtimePay?opsLine('더 일한 수당',`−${e.overtimePay}코인 (${e.overtime}분 × ${OPS.overtime.rate})`):'')+opsLine('오늘 남은 돈',`<strong>${e.net}코인</strong>`)+opsLine('우리 회사 돈',`${e.moneyBefore} → <strong>${e.moneyBefore+e.net}코인</strong>`);
+ const rival=comparableRun(o)&&validRecord(o.rival)?o.rival:null;
+ const pace=rival?.days?.[e.day],verdict=e.day===4?recordVerdict(o):'';
+ const line=$('dayRace');
+ line.textContent=[verdict,Number.isFinite(pace)?`최고 기록의 ${e.day+1}일차 ${pace}코인 · 현재 ${signed(e.moneyBefore+e.net-pace)}코인 차이`:''].filter(Boolean).join(' · ');
+ line.hidden=!line.textContent;
  let c=opsLine('받은 주문',opsList(e.got))+opsLine('포기한 주문',opsList(e.left));
  if(e.resident)c+=opsLine('보행자단지',residentName(e.resident)+(e.resident==='block'?' · 주민들이 통행로를 지나가지 못해 불편했어요':''))+(e.alts??[]).map(a=>opsLine('다른 방법이었다면',alternativeText(residentName(a?.resident),a))).join('');
  if(e.lost?.length)c+=opsLine('오지 않은 주문',opsList(e.lost)+' · 주민들이 다른 회사를 골랐어요');
@@ -3096,13 +3171,17 @@ function showReport(){
  details.open=false;
  const comparable=o.scoreRules===1,maximum=sheetMaxProfits[o.sheet],gap=maximum-o.money;
  const status=comparable?(gap===0?'최고 달성!':`최고까지 ${gap}코인`):'이전 저장 기록 · 현재 규칙으로 계산한 참고값';
+ const verdict=recordVerdict(o),best=comparable?Math.max(o.money,o.bestBeforeFinish?.money??o.money):null;
+ $('restartOps').textContent=!comparable?'같은 주문으로 다시 도전':best>=maximum?'같은 주문으로 다시 도전':`내 기록 ${best}코인 깨기`;
+ $('reportScore').classList.toggle('record-pop',verdict==='개인 신기록!'&&o.reportSeen===false);
  const previous=comparable&&Number.isFinite(o.previousProfit)?`<small>직전 도전 ${o.previousProfit}코인 · ${signed(o.money-o.previousProfit)}코인</small>`:'';
- $('reportScore').innerHTML=`<div><span>내 순이익</span><strong>${icon('icon-coin','score-coin')}${o.money}<small>코인</small></strong></div>
+ $('reportScore').innerHTML=`<div><span>내 순이익</span><strong id="reportMoney">${o.money}<small>코인</small></strong></div>
+ ${comparable?`<div><span>개인 최고</span><strong id="personalBest">${icon('icon-coin','score-coin')}${best}<small>코인</small></strong></div>`:''}
  <div><span>${comparable?'이 주문표':'현재 규칙'} 최대 순이익</span><strong>${maximum}<small>코인</small></strong></div>
- <p>${status}${previous}</p>`;
+ <p>${verdict?verdict+' · ':''}${status}${previous}</p>`;
  duration.textContent=`${log.length}일`;
  $('reportFlow').innerHTML=`<ul class="report-reflections">
-  <li><small>(가계와 기업의 역할)</small> 너의 회사는 주민에게 배송료 ${sum('gross')}코인을 받고 배송했어요. 회사 돈은 <strong id="reportMoney">${o.money}코인</strong>이 됐어요. ${o.truck?`탑차 ${o.truck}칸 · 투자비 ${sum('investment')}코인.`:''} <b>주민과 회사는 무엇을 주고받았나요?</b></li>
+  <li><small>(가계와 기업의 역할)</small> 너의 회사는 주민에게 배송료 ${sum('gross')}코인을 받고 배송했어요. ${o.truck?`탑차 ${o.truck}칸 · 투자비 ${sum('investment')}코인.`:''} <b>주민과 회사는 무엇을 주고받았나요?</b></li>
   <li><small>(근로자의 권리)</small> 너의 회사는 기사에게 일당으로 모두 ${sum('wage')}코인을 줬어요. ${payStory} <b>수당은 왜 줘야 할까요?</b></li>
   <li><small>(기업의 자유와 책임)</small> 너의 회사는 ${parkingStory} <b>어떤 주차가 주민과 회사에 좋을까요?</b></li>
  </ul>`;
