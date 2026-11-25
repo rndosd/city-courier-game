@@ -1823,6 +1823,7 @@ const residentReaction=(()=>{
    }
    if(!step||step===lastStep)return;
    lastStep=step;
+   if(state.phase==='handoff')return;
    const isBlock=step.kind==='event'&&step.eventId==='resident'&&state.ops?.resident==='block';
    if(!isBlock&&step.kind!=='deliver')return;
    const event={kind:isBlock?'block':'thanks',id:step.orderId,position:step.position};
@@ -2088,8 +2089,18 @@ bakeryDialogue.addEventListener('cancel',event=>event.preventDefault());
 bakeryDialogue.addEventListener('keydown',event=>{
  if(event.repeat&&(event.key==='Enter'||event.key===' '))event.preventDefault();
 });
-$('bakeryContinue').onclick=()=>{
+$('bakeryContinue').onclick=event=>{
  if(state.phase!=='handoff'||!bakeryDialogue.open)return;
+ if(event.detail>0){
+  // A second tap in the same spot can otherwise hit the dispatch controls underneath.
+  const ignoreSecondTap=next=>{
+   if(!next.detail||Math.hypot(next.clientX-event.clientX,next.clientY-event.clientY)>16)return;
+   next.preventDefault();
+   next.stopImmediatePropagation();
+  };
+  document.addEventListener('click',ignoreSecondTap,true);
+  setTimeout(()=>document.removeEventListener('click',ignoreSecondTap,true),350);
+ }
  bakeryGreetingSeen=true;
  bakeryDialogue.close();
  state.phase='running';
